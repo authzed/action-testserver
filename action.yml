@@ -1,0 +1,11 @@
+name: "Run Authzed Test Server"
+description: "Sets up an Authzed test server"
+author: "authzed"
+inputs:
+  version:
+    description: "Version of `zed testserver` to use"
+    required: false
+    default: "latest"
+runs:
+  using: "docker"
+  image: "Dockerfile"
