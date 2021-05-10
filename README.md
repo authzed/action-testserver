@@ -10,7 +10,7 @@ Add the following any workflow:
 
 ```yaml
 steps:
-- uses: "authzed/action-testserver@v1"
+- uses: "authzed/action-testserver@v2"
   with:
-    version: "v0.0.1-alpha" # defaults to "latest"
+    version: "latest"
 ```
