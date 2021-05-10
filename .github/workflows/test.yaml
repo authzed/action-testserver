@@ -1,0 +1,22 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+    - uses: engineerd/configurator@v0.0.6
+      with:
+        name: "grpcurl"
+        fromGitHubReleases: "true"
+        pathInArchive: "grpcurl"
+        repo: "fullstorydev/grpcurl"
+        urlTemplate: "https://github.com/fullstorydev/grpcurl/releases/download/{{version}}/grpcurl_{{rawVersion}}_linux_x86_64.tar.gz"
+        version: "^v1.8"
+        token: "${{ secrets.GITHUB_TOKEN }}"
+    - name: "ping server"
+      run: |
+        grpcurl -plaintext -d '{"config": {"name":"test/user","relation":[]}}' localhost:50051 NamespaceService/WriteConfig
